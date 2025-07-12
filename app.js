@@ -20,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
 	res.render('home');
@@ -53,7 +54,11 @@ app.get('/campgrounds/:id/edit', async (req, res) => {
 
 app.get('/campgrounds/:id', async (req, res) => {
 	const campground = await Campground.findById(req.params.id);
-	res.render('campgrounds/show', { campground });
+	const formattedPrice = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	}).format(campground.price);
+	res.render('campgrounds/show', { campground, formattedPrice });
 });
 
 app.put('/campgrounds/:id', async (req, res) => {
