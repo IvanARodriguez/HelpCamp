@@ -5,7 +5,7 @@ const Campground = require('./models/campground');
 const methodOverride = require('method-override');
 const morgan = require('morgan');
 const ejsMate = require('ejs-mate');
-const AppError = require('./error');
+const AppError = require('./utils/error');
 
 mongoose.connect('mongodb://localhost:27017/help-camp');
 
@@ -100,8 +100,9 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-	const { status = 500, message = 'Something went wrong' } = err;
-	res.status(status).send(message);
+	const { status = 500 } = err;
+	if (!err.message) err.message = 'Something went wrong on our side';
+	res.status(status).render('error', { err });
 });
 
 app.listen('3000', () => {

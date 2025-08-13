@@ -1,0 +1,14 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="  place-items-center bg-gray-100 px-6  sm:py-32 lg:px-8">
+  <div class="text-center">
+    <p class="text-base font-semibold text-blue-400"><%= err.status %></p>
+    <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">We're Sorry</h1>
+    <p class="mt-6 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8"><%= err.message %></p>
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+      <a href="/"
+        class="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500">Go
+        back home</a>
+    </div>
+  </div>
+</div>
