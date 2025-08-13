@@ -1,26 +1,28 @@
 <% layout('layouts/boilerplate') %>
+<div class="flex-grow container mx-auto px-4 py-8">
 
-<div class="flex justify-between items-center mb-6">
-  <h1 class="text-3xl font-bold text-gray-800">All Campgrounds</h1>
-  <a href="/campgrounds/create" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
-    + Add Campground
-  </a>
-</div>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">All Campgrounds</h1>
+    <a href="/campgrounds/create" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow">
+      + Add Campground
+    </a>
+  </div>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-  <% for (let campground of campgrounds) { %>
-  <a href="/campgrounds/<%= campground._id %>"
-    class="block bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
-    <img src="<%=campground.image%>" alt="image of <%= campground.title %>"
-      class="aspect-3/2 object-cover rounded-t-lg" />
-    <div class="p-4">
-      <h2 class="text-xl font-semibold text-gray-800"><%= campground.title %></h2>
-      <h3><%= campground.location %></h3>
-      <p class="font-semibold text-lg"><sup>$</sup><%=campground.price%><sup>00</sup></p>
-      <p class="text-sm text-gray-600 mt-1 line-clamp-2">
-        <%= campground.description?.substring(0, 100) || 'No description available' %>
-      </p>
-    </div>
-  </a>
-  <% } %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <% for (let campground of campgrounds) { %>
+    <a href="/campgrounds/<%= campground._id %>"
+      class="block bg-white rounded-lg shadow hover:shadow-lg transition duration-300">
+      <img src="<%=campground.image%>" alt="image of <%= campground.title %>"
+        class="aspect-video object-cover rounded-t-lg" />
+      <div class="p-4">
+        <h2 class="text-xl font-semibold text-gray-800"><%= campground.title %></h2>
+        <h3><%= campground.location %></h3>
+        <p class="font-semibold text-lg"><sup>$</sup><%=campground.price%><sup>00</sup></p>
+        <p class="text-sm text-gray-600 mt-1 line-clamp-2">
+          <%= campground.description?.substring(0, 100) || 'No description available' %>
+        </p>
+      </div>
+    </a>
+    <% } %>
+  </div>
 </div>

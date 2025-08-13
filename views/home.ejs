@@ -1,2 +1,24 @@
 <% layout('layouts/boilerplate') %>
-<h1>Home! HelpCamp</h1>
+
+<div
+  class="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-700 flex flex-col justify-center items-center px-6 text-center text-white">
+  <h1 class="text-5xl font-extrabold mb-4 drop-shadow-lg">
+    Welcome to <span class="text-yellow-400">HelpCamp</span>
+  </h1>
+
+  <p class="max-w-2xl text-lg mb-8 drop-shadow-md">
+    Discover and share the best campgrounds around the world. Easily create, edit, and explore beautiful camping spots.
+  </p>
+
+  <div class="flex flex-wrap justify-center gap-6">
+    <a href="/campgrounds"
+      class="px-6 py-3 bg-yellow-400 text-blue-900 font-semibold rounded-lg shadow-lg hover:bg-yellow-300 transition">
+      View Campgrounds
+    </a>
+
+    <a href="/campgrounds/create"
+      class="px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-indigo-700 transition">
+      Add New Campground
+    </a>
+  </div>
+</div>
