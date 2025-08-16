@@ -1,11 +1,12 @@
-
-###
 POST http://localhost:3000/campgrounds
 Content-Type: application/json
 Accept: application/json
 
 {
-  "campground": {}
+  "campground": {
+    "title": ""
+  }
 }
+
 
 ###

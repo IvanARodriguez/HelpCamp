@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const ejsMate = require('ejs-mate');
 const AppError = require('./utils/error');
+const Joi = require('joi');
 
 mongoose.connect('mongodb://localhost:27017/help-camp');
 
@@ -18,6 +19,7 @@ const app = express();
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
@@ -51,10 +53,23 @@ app.get(
 app.post(
 	'/campgrounds',
 	catchAsyncErrors(async (req, res) => {
-		if (!req.body || !req.body.campground) {
-			throw new AppError('missing campground in request', 400);
+		const campgroundSchema = Joi.object({
+			campground: Joi.object({
+				title: Joi.string().required(),
+				price: Joi.number().required().min(0),
+			}).required(),
+		});
+
+		const result = campgroundSchema.validate(req.body);
+
+		if (result.error) {
+			throw new AppError(
+				result.error.details.map((err) => err.message).join(', '),
+				400
+			);
 		}
-		const { campground } = await req.body;
+
+		const { campground } = req.body;
 		const camp = new Campground(campground);
 		await camp.save();
 		return res.redirect(`/campgrounds/${camp._id}`);
